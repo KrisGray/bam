@@ -115,7 +115,7 @@ export class URLFetchable extends Fetchable {
   static seed = 0;
   static isSafari: boolean = navigator.userAgent.indexOf('Safari') >= 0 && navigator.userAgent.indexOf('Chrome') < 0;
 
-  constructor(url: string, start: number, end: number, opts: any) {
+  constructor(url: string, start?: number, end?: number, opts?: any) {
     super();
     if (!opts) {
       if (typeof start === 'object') {

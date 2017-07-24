@@ -7,7 +7,7 @@ declare module 'bam' {
   }
 
   export class URLFetchable {
-    constructor(url: string, start: number, end: number, opts: any);
+    constructor(url: string, start?: number, end?: number, opts?: any);
     slice(s: number, l: number): URLFetchable;
     fetchAsText(callback: any): any;
     salted(): URLFetchable;
