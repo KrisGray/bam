@@ -1,2 +1,2 @@
 # bam
-bam reading code taken and them adapted from dalliance
+bam reading code taken and then adapted from dalliance (https://github.com/dasmoth/dalliance).
