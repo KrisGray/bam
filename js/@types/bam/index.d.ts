@@ -1,5 +1,5 @@
 declare module 'bam' {
-  export class Util {
+  export class Utils {
     constructor();
     static numberReader(type: string, ba: Uint8Array , offset: number): number;
     static urlFetchableFactory(url: string, start: number, end: number, opts: any): URLFetchable;
