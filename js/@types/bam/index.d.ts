@@ -2,7 +2,7 @@ declare module 'bam' {
   export class Utils {
     constructor();
     static numberReader(type: string, ba: Uint8Array , offset: number): number;
-    static urlFetchableFactory(url: string, start: number, end: number, opts: any): URLFetchable;
+    static urlFetchableFactory(url: string, start?: number, end?: number, opts?: any): URLFetchable;
     static blobFetchableFactory(blob: Blob): BlobFetchable
   }
 
