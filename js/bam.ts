@@ -35,7 +35,7 @@ export class BamFile {
   indexToChr: string[];
   chrToIndex: { [key: string]: number };
   indices: Uint8Array[];
-  indexChunks: any;
+  indexChunks?: any;
   bai: any;
   data: any;
   static readonly BAM_MAGIC = 0x14d4142;
@@ -57,11 +57,11 @@ export class BamFile {
   private static readonly SEQRET_DECODER = ['=', 'A', 'C', 'x', 'G', 'x', 'x', 'x', 'T', 'x', 'x', 'x', 'x', 'x', 'x', 'N'];
   private static readonly CIGAR_DECODER = ['M', 'I', 'D', 'N', 'S', 'H', 'P', '=', 'X', '?', '?', '?', '?', '?', '?', '?'];
 
-  static factory(data: any, bai: any, indexChunks: any, callback: any, attempted: any): BamFile {
+  static factory(data: any, bai: any, callback: any, attempted?: any, indexChunks?: any): BamFile {
     const bam = new BamFile();
     bam.data = data;
     bam.bai = bai;
-    bam.indexChunks = indexChunks;
+    bam.indexChunks = indexChunks||undefined;
 
     let minBlockIndex = bam.indexChunks ? bam.indexChunks.minBlockIndex : 1000000000;
 
@@ -146,7 +146,7 @@ export class BamFile {
             bam.bai.url = bam.data.url.replace(new RegExp('.bam$'), '.bai');
 
             // True lets us know we are making a second attempt
-            return BamFile.factory(data, bam.bai, indexChunks, callback, true);
+            return BamFile.factory(data, bam.bai, callback, true, indexChunks);
           }
           else {
             // We've attempted x.bam.bai & x.bai and nothing worked

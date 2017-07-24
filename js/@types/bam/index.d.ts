@@ -24,7 +24,7 @@ declare module 'bam' {
   export class BamFile{
     constructor();
 
-    static factory(data: any, bai: any, indexChunks: any, callback: any, attempted: any): BamFile;
+    static factory(data: any, bai: any, callback: any, attempted?: any, indexChunks?: any): BamFile;
     blocksForRange(refId: number, min: number, max: number): Chunk[];
     fetch(chr: string, min: number, max: number, callback: any, opts: any): any;
     readBamRecords(ba: Uint8Array, offset: number, sink: BamRecord[], min: number, max: number, chrId: number, opts: any): boolean;
