@@ -25,3 +25,12 @@ gulp.task("ts", ["clean"], function () {
     .pipe(source('index.js'))
     .pipe(gulp.dest("dist"));
 });
+
+gulp.task("types", ["clean", "ts"], function(){
+    return gulp.src([
+        './js/@types/bam/index.d.ts'
+    ])
+    .pipe(gulp.dest('./dist/@types/bam'));
+});
+
+gulp.task("default", ["types"]);

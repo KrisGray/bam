@@ -1,11 +1,3 @@
-/* -*- mode: javascript; c-basic-offset: 4; indent-tabs-mode: nil -*- */
-
-// 
-// Dalliance Genome Explorer
-// (c) Thomas Down 2006-2011
-//
-// bin.js general binary data support
-//
 import Utils from './utils';
 import SHA1 from './sha1';
 

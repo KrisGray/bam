@@ -1,10 +1,37 @@
 import Vob from './vob';//methods: readVob
 import BGZF from './bgzf';
-import { NumberReader } from './bin';//methods: readInt
+import { NumberReader, URLFetchable, BlobFetchable } from './bin';
 import Chunk from './chunk';
 import BamRecord from './bam-record';
 
-export default class BamFile {
+export class Utils {
+  static numberReader(type: string, ba: Uint8Array , offset: number): number{
+    const dispatch: any = {
+      int: NumberReader.readInt,
+      int64: NumberReader.readInt64,
+      short: NumberReader.readShort,
+      byte: NumberReader.readByte,
+      intBE: NumberReader.readIntBE,
+      float: NumberReader.readFloat
+    };
+
+    if(dispatch[type]){
+      return dispatch[type](ba, offset);
+    } else {
+      throw new Error('Type not recognised');
+    }
+  }
+
+  static urlFetchableFactory(url: string, start: number, end: number, opts: any): URLFetchable {
+    return new URLFetchable(url, start, end, opts);
+  }
+
+  static blobFetchableFactory(blob: Blob): BlobFetchable {
+    return new BlobFetchable(blob);
+  }
+}
+
+export class BamFile {
   indexToChr: string[];
   chrToIndex: { [key: string]: number };
   indices: Uint8Array[];
@@ -206,7 +233,7 @@ export default class BamFile {
 
   constructor() { }
 
-  blocksForRange(refId: number, min: number, max: number) {
+  blocksForRange(refId: number, min: number, max: number): Chunk[] {
     const index: Uint8Array = this.indices[refId];
     if (!index) {
       return [];
@@ -296,7 +323,7 @@ export default class BamFile {
     return mergedChunks;
   }
 
-  fetch(chr: string, min: number, max: number, callback: any, opts: any) {
+  fetch(chr: string, min: number, max: number, callback: any, opts: any): any {
     const thisB = this;
     opts = opts || {};
 
@@ -354,7 +381,7 @@ export default class BamFile {
     tramp();
   }
 
-  readBamRecords(ba: Uint8Array, offset: number, sink: BamRecord[], min: number, max: number, chrId: number, opts: any) {
+  readBamRecords(ba: Uint8Array, offset: number, sink: BamRecord[], min: number, max: number, chrId: number, opts: any): boolean {
     while (true) {
       const blockSize = NumberReader.readInt(ba, offset);
       const blockEnd = offset + blockSize + 4;
