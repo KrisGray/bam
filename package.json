@@ -11,6 +11,9 @@
   "author": "“Kristian <“kristian.gray@gmail.com”> (https://github.com/KrisGray)",
   "license": "ISC",
   "devDependencies": {
+  },
+  "dependencies": {
+    "jszlib": "github:dasmoth/jszlib",
     "browserify": "^14.4.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
@@ -19,8 +22,5 @@
     "tsify": "^3.0.1",
     "typescript": "^2.4.2",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "dependencies": {
-    "jszlib": "github:dasmoth/jszlib"
   }
 }
