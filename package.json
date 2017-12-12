@@ -5,13 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/@types/bam/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "gulp --gulpfile ./gulpfile.js"
   },
   "author": "“Kristian <“kristian.gray@gmail.com”> (https://github.com/KrisGray)",
   "license": "ISC",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "jszlib": "github:dasmoth/jszlib",
     "browserify": "^14.4.0",
